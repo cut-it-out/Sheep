@@ -8,16 +8,31 @@ public class Sheep : MonoBehaviour
     [SerializeField] float randomMoveDistance = 5f;
     [SerializeField] float randomMoveTimerMin = 3f;
     [SerializeField] float randomMoveTimerMax = 6f;
+    [SerializeField] float sheepPlayerDistance = 3f;
 
     private NavMeshAgent agent;
-    private SphereCollider senseCollider;
+    private GameObject player;
     Vector3 newPos;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        senseCollider = GetComponentInChildren<SphereCollider>();
+        player = GameObject.FindWithTag("Player");
         Coroutine randomMove = StartCoroutine(RandomMove());
+    }
+
+    private void Update()
+    {
+        float squaredDist = (transform.position - player.transform.position).sqrMagnitude;
+        float sheepPlayerDistanceSqrt = sheepPlayerDistance * sheepPlayerDistance;
+
+        if (squaredDist < sheepPlayerDistanceSqrt)
+        {
+            Vector3 dirToPlayer = transform.position - player.transform.position;
+            Vector3 newPos = transform.position + dirToPlayer;
+
+            agent.SetDestination(newPos);
+        }
     }
 
     private IEnumerator RandomMove()
@@ -26,7 +41,7 @@ public class Sheep : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(randomMoveTimerMin, randomMoveTimerMax));
 
-            if(RandomPoint(gameObject.transform.position, randomMoveDistance, out newPos))
+            if(RandomPoint(transform.position, randomMoveDistance, out newPos))
             {
                 Debug.Log(newPos);
                 agent.SetDestination(newPos);
