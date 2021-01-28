@@ -793,9 +793,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75258372b8c7a014fa7421fa487ba023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 291477744}
-  smoothSpeed: 2
-  offset: {x: 0, y: 7.7, z: -6.74}
+  target: {fileID: 7178289106643765090}
+  lookAtTarget: {fileID: 291477744}
+  targetOffset: {x: 0, y: 0, z: 0}
+  lookAtOffset: {x: 0, y: 4.25, z: 0}
+  smoothSpeed: 5
 --- !u!1001 &1189149966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1221,6 +1223,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4627661113073030620, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7178289106933342093, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1271,3 +1277,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
+--- !u!4 &7178289106643765090 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4627661113073030620, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
+  m_PrefabInstance: {fileID: 7178289106643765089}
+  m_PrefabAsset: {fileID: 0}
