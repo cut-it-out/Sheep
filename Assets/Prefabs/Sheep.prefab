@@ -130,6 +130,8 @@ MonoBehaviour:
   randomMoveTimerMin: 3
   randomMoveTimerMax: 6
   sheepPlayerDistance: 5
+  whiteMaterial: {fileID: 2100000, guid: 5f28483f955cc3c4eaf78e06440d37a0, type: 2}
+  redMaterial: {fileID: 2100000, guid: 9b0e09d7c263ada448f302701d3456e2, type: 2}
 --- !u!195 &6907938530133124007
 NavMeshAgent:
   m_ObjectHideFlags: 0

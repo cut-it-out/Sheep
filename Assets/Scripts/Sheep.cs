@@ -5,20 +5,32 @@ using UnityEngine.AI;
 
 public class Sheep : MonoBehaviour
 {
+
+    [Header("Random movement")]
     [SerializeField] float randomMoveDistance = 5f;
     [SerializeField] float randomMoveTimerMin = 3f;
     [SerializeField] float randomMoveTimerMax = 6f;
+    
+    [Header("Player Distance")]
     [SerializeField] float sheepPlayerDistance = 3f;
+
+    [Header("Materials for testing")]
+    [SerializeField] Material whiteMaterial;
+    [SerializeField] Material redMaterial;
+
 
     private NavMeshAgent agent;
     private GameObject player;
-    Vector3 newPos;
+    
+    MeshRenderer meshRenderer;
+    Coroutine randomMove;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
-        Coroutine randomMove = StartCoroutine(RandomMove());
+        randomMove = StartCoroutine(RandomMove());
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
     }
 
     private void Update()
@@ -35,15 +47,27 @@ public class Sheep : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Target")
+        {
+            meshRenderer.material = redMaterial;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        meshRenderer.material = whiteMaterial;
+    }
+
     private IEnumerator RandomMove()
     {
         while (true)
         {
             yield return new WaitForSeconds(Random.Range(randomMoveTimerMin, randomMoveTimerMax));
 
-            if(RandomPoint(transform.position, randomMoveDistance, out newPos))
+            if(RandomPoint(transform.position, randomMoveDistance, out Vector3 newPos))
             {
-                Debug.Log(newPos);
                 agent.SetDestination(newPos);
             }
         }
