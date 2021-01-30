@@ -15,8 +15,8 @@ public class Sheep : MonoBehaviour
     [SerializeField] float sheepPlayerDistance = 3f;
 
     [Header("Materials for testing")]
-    [SerializeField] Material whiteMaterial;
-    [SerializeField] Material redMaterial;
+    [SerializeField] Material sheepMaterial;
+    [SerializeField] Material onTargetMaterial;
 
 
     private NavMeshAgent agent;
@@ -51,13 +51,15 @@ public class Sheep : MonoBehaviour
     {
         if (other.gameObject.tag == "Target")
         {
-            meshRenderer.material = redMaterial;
+            meshRenderer.material = onTargetMaterial;
+            StopCoroutine(randomMove);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        meshRenderer.material = whiteMaterial;
+        meshRenderer.material = sheepMaterial;
+        randomMove = StartCoroutine(RandomMove());
     }
 
     private IEnumerator RandomMove()

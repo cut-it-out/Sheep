@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6907938530133124007}
   m_Layer: 0
   m_Name: Sheep
-  m_TagString: Untagged
+  m_TagString: Sheep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,8 +130,8 @@ MonoBehaviour:
   randomMoveTimerMin: 3
   randomMoveTimerMax: 6
   sheepPlayerDistance: 5
-  whiteMaterial: {fileID: 2100000, guid: 5f28483f955cc3c4eaf78e06440d37a0, type: 2}
-  redMaterial: {fileID: 2100000, guid: 9b0e09d7c263ada448f302701d3456e2, type: 2}
+  sheepMaterial: {fileID: 2100000, guid: 5f28483f955cc3c4eaf78e06440d37a0, type: 2}
+  onTargetMaterial: {fileID: 2100000, guid: d42c5aa2e877fa844a75883e33d2b6f7, type: 2}
 --- !u!195 &6907938530133124007
 NavMeshAgent:
   m_ObjectHideFlags: 0
