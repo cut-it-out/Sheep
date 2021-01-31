@@ -7,7 +7,8 @@ public enum ButtonType
     SELECT_LEVEL,
     PAUSE_GAME,
     RESUME_GAME,
-    RESTART_GAME
+    RESTART_LEVEL,
+    MAIN_MENU
 }
 
 [RequireComponent(typeof(Button))]
@@ -17,12 +18,14 @@ public class ButtonController : MonoBehaviour
 
     CanvasManager canvasManager;
     Button menuButton;
+    Game game;
 
     private void Start()
     {
         menuButton = GetComponent<Button>();
         menuButton.onClick.AddListener(OnButtonClicked);
         canvasManager = CanvasManager.GetInstance();
+        game = Game.GetInstance();
     }
 
     void OnButtonClicked()
@@ -30,20 +33,27 @@ public class ButtonController : MonoBehaviour
         switch (buttonType)
         {
             case ButtonType.START_GAME:
-                //Call other code that is necessary to start the game like levelManager.StartGame()
+                game.LoadNextLevel(); // load first/next level
                 canvasManager.SwitchCanvas(CanvasType.GameUI);
                 break;
             case ButtonType.SELECT_LEVEL:
                 canvasManager.SwitchCanvas(CanvasType.LevelSelector);
                 break;
             case ButtonType.PAUSE_GAME:
+                game.PauseGame();
                 canvasManager.SwitchCanvas(CanvasType.PauseMenu);
                 break;
             case ButtonType.RESUME_GAME:
+                game.ResumeGame();
                 canvasManager.SwitchCanvas(CanvasType.GameUI);
                 break;
-            case ButtonType.RESTART_GAME:
+            case ButtonType.RESTART_LEVEL:
+                game.RestartLevel();
                 canvasManager.SwitchCanvas(CanvasType.GameUI);
+                break;
+            case ButtonType.MAIN_MENU:
+                game.PauseGame();
+                canvasManager.SwitchCanvas(CanvasType.MainMenu);
                 break;
             default:
                 break;

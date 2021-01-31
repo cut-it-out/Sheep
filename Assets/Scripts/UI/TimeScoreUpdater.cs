@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InGameUIController : MonoBehaviour
+public class TimeScoreUpdater : MonoBehaviour
 {
-    [SerializeField] TMP_Text timerText;
-
+    TMP_Text timerText;
     Game game;
 
     private void Start()
     {
+        timerText = GetComponent<TMP_Text>();
         game = Game.GetInstance();
     }
 

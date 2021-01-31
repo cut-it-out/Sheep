@@ -9,36 +9,42 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask canBeClickedOn;
     [SerializeField] float keyboardForwardSpeed = 2f;
 
-    private NavMeshAgent agent;
+    NavMeshAgent agent;
+    Game game;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        game = Game.GetInstance();
     }
 
     private void Update()
     {
-        float horInput = Input.GetAxis("Horizontal");
-        float verInput = Input.GetAxis("Vertical");
-
-        if(Mathf.Abs(horInput) > 0 || Mathf.Abs(verInput) > 0)
+        if (!game.IsPaused)
         {
-            Vector3 moveDestination = transform.position + transform.right * horInput + transform.forward * verInput * keyboardForwardSpeed;
+            float horInput = Input.GetAxis("Horizontal");
+            float verInput = Input.GetAxis("Vertical");
 
-            agent.SetDestination(moveDestination);
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
+            if(Mathf.Abs(horInput) > 0 || Mathf.Abs(verInput) > 0)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hitInfo;
+                Vector3 moveDestination = transform.position + transform.right * horInput + transform.forward * verInput * keyboardForwardSpeed;
 
-                if (Physics.Raycast(ray, out hitInfo, 100, canBeClickedOn))
+                agent.SetDestination(moveDestination);
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown(0))
                 {
-                    agent.SetDestination(hitInfo.point);
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit hitInfo;
+
+                    if (Physics.Raycast(ray, out hitInfo, 100, canBeClickedOn))
+                    {
+                        agent.SetDestination(hitInfo.point);
+                    }
                 }
             }
         }
+
     }
 }

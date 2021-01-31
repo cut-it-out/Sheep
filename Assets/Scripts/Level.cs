@@ -14,7 +14,7 @@ public class Level : MonoBehaviour
 
     public void TargetIsMet()
     {
-        game.StopTimer();
+        game.LevelFinished();
         LevelTimer = game.LevelTimer;
     }
 }
