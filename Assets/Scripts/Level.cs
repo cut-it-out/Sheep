@@ -9,7 +9,7 @@ public class Level : MonoBehaviour
 
     private void Start()
     {
-        game = FindObjectOfType<Game>();
+        game = Game.GetInstance();
     }
 
     public void TargetIsMet()

@@ -11,7 +11,7 @@ public class InGameUIController : MonoBehaviour
 
     private void Start()
     {
-        game = FindObjectOfType<Game>();
+        game = Game.GetInstance();
     }
 
     private void Update()

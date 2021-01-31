@@ -2,35 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Game : MonoBehaviour
+public class Game : Singleton<Game>
 {
-    public static Game Instance;
     public float LevelTimer { get; private set; }
 
     [SerializeField] List<GameObject> levels = new List<GameObject>();
 
     Coroutine timer;
 
-    private void Awake()
-    {
-        MakeSingleton();
-    }
-
-    private void MakeSingleton()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         // TODO load first level
         StartTimer();
