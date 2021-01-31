@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] LayerMask canBeClickedOn;
-    [SerializeField] float keyboardForwardSpeed = 2f;
+    [SerializeField] float keyboardMoveSpeed = 2f;
 
     NavMeshAgent agent;
     Game game;
@@ -27,7 +27,10 @@ public class PlayerMovement : MonoBehaviour
 
             if(Mathf.Abs(horInput) > 0 || Mathf.Abs(verInput) > 0)
             {
-                Vector3 moveDestination = transform.position + transform.right * horInput + transform.forward * verInput * keyboardForwardSpeed;
+                Vector3 moveDestination = 
+                    transform.position 
+                    + Vector3.right * horInput  * keyboardMoveSpeed
+                    + Vector3.forward * verInput * keyboardMoveSpeed;
 
                 agent.SetDestination(moveDestination);
             }

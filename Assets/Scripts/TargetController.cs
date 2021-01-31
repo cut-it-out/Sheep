@@ -23,17 +23,16 @@ public class TargetController : MonoBehaviour
 
     private void CheckCountAndHandleActions()
     {
-        Debug.Log("currentCount: " + currentCount);
         if (currentCount >= targetCount)
         {
             meshRenderer.material = targetDone;
-            Debug.Log("count is bigger");
+            Debug.Log($"currentCount: {currentCount} -> count is bigger");
             level.TargetIsMet();
         }
         else if (currentCount < targetCount)
         {
             meshRenderer.material = targetActive;
-            Debug.Log("count is less");
+            Debug.Log($"currentCount: {currentCount} -> count is less");
         }
     }
 

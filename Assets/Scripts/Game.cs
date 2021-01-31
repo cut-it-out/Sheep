@@ -39,7 +39,7 @@ public class Game : Singleton<Game>
     public void LevelFinished()
     {
         StopTimer();
-        IsPaused = false;
+        IsPaused = true;
         canvasManager.SwitchCanvas(CanvasType.LevelFinished);
     }
 
