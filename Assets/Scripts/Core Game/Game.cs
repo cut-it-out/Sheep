@@ -8,32 +8,37 @@ public class Game : Singleton<Game>
     public float LevelTimer { get; private set; }
     public bool IsPaused { get; private set; }
 
-    [SerializeField] List<GameObject> levels = new List<GameObject>();
-
     Coroutine timer;
     CanvasManager canvasManager;
-    GameObject currentLevelObject;
-
+    LevelManager levelManager;
+    Player player;
 
     private void Start()
     {
         canvasManager = CanvasManager.GetInstance();
+        levelManager = GetComponent<LevelManager>();
+        player = Player.GetInstance();
         IsPaused = true;
     }
 
     public void LoadNextLevel()
     {
-        // TODO: LOAD LEVEL LOGIC COMES HERE 
-        // load next level which is not yet finished (take into account saved achievements)
-
+        Debug.Log("levelManager.LoadLevel();");
+        levelManager.LoadLevel();
+        Debug.Log("player.MoveToStartPosition(levelManager.PlayerStartTransform);");
+        player.MoveToStartPosition(levelManager.PlayerStartTransform);
         IsPaused = false;
         StartTimer();
     }
 
     public void RestartLevel()
     {
-        // TODO handle restart
-        LoadNextLevel();
+        StopTimer();
+        IsPaused = true;
+        levelManager.LoadLevel(levelManager.CurrentLevelIndex);
+        player.MoveToStartPosition(levelManager.PlayerStartTransform);
+        IsPaused = false;
+        StartTimer();
     }
 
     public void LevelFinished()

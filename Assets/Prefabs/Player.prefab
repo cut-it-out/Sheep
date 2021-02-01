@@ -29,7 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7178289106933342097}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7178289106933342093
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 7178289106933342096}
   - component: {fileID: 7178289106933342099}
   - component: {fileID: 7178289106933342098}
+  - component: {fileID: 804316864}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -61,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 7178289106933342093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.72, y: 0.5, z: -6.74}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_Children:
   - {fileID: 4627661113073030620}
   m_Father: {fileID: 0}
@@ -160,6 +161,7 @@ MonoBehaviour:
   canBeClickedOn:
     serializedVersion: 2
     m_Bits: 64
+  keyboardMoveSpeed: 2
 --- !u!195 &7178289106933342098
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -182,3 +184,15 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &804316864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178289106933342093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c08a8689a9cb60498ff3beee6d54fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

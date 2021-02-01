@@ -48,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+    }
 
+    public void MovePlayer(Vector3 moveToPos)
+    {
+        agent.SetDestination(moveToPos);
     }
 }
