@@ -15,11 +15,11 @@ public class Level : MonoBehaviour
 
     public int HowManyStars(float levelTime)
     {
-        if (twoStarTime / 2 <= levelTime)
+        if (twoStarTime / 2 >= levelTime)
         {
             return 3;
         }
-        if (twoStarTime <= levelTime)
+        if (twoStarTime >= levelTime)
         {
             return 2;
         }
