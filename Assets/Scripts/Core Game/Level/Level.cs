@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    public float LevelTimer { get; private set; }
+    [SerializeField] float twoStarTime = 60f;
+
     Game game;
 
     private void Start()
@@ -12,9 +13,26 @@ public class Level : MonoBehaviour
         game = Game.GetInstance();
     }
 
+    public int HowManyStars(float levelTime)
+    {
+        if (twoStarTime / 2 <= levelTime)
+        {
+            return 3;
+        }
+        if (twoStarTime <= levelTime)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
+
+    }
+
     public void TargetIsMet()
     {
-        game.LevelFinished();
-        LevelTimer = game.LevelTimer;
+        game.LevelFinished(this);
     }
+
 }

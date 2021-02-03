@@ -7,19 +7,32 @@ public class Game : Singleton<Game>
 {
     public float LevelTimer { get; private set; }
     public bool IsPaused { get; private set; }
+    public GameData Data { get; private set; }
 
     Coroutine timer;
     CanvasManager canvasManager;
     LevelManager levelManager;
     Player player;
-
+    
     private void Start()
     {
         canvasManager = CanvasManager.GetInstance();
-        levelManager = GetComponent<LevelManager>();
+        levelManager = LevelManager.GetInstance();
         player = Player.GetInstance();
         IsPaused = true;
+        
+        // load previous saves if they exist
+        Data = DataManager.LoadData();
+        if (Data == null)
+        {
+            Debug.Log("setup new GameData()");
+            Data = new GameData(levelManager.LevelCount());
+        }
+
+//        DataManager.SaveData(Data);
     }
+
+    #region Game State Related Functions
 
     public void LoadNextLevel()
     {
@@ -41,10 +54,17 @@ public class Game : Singleton<Game>
         StartTimer();
     }
 
-    public void LevelFinished()
+    public void LevelFinished(Level level)
     {
         StopTimer();
         IsPaused = true;
+
+        //save game data
+        Data.levelNames[levelManager.CurrentLevelIndex] = levelManager.CurrentLevelObject.name;
+        Data.levelTimes[levelManager.CurrentLevelIndex] = LevelTimer;
+        Data.levelStars[levelManager.CurrentLevelIndex] = level.HowManyStars(LevelTimer);
+        DataManager.SaveData(Data);
+
         canvasManager.SwitchCanvas(CanvasType.LevelFinished);
     }
 
@@ -66,12 +86,16 @@ public class Game : Singleton<Game>
         Application.Quit();
     }
 
-    public void StartTimer()
+    #endregion
+
+    #region Timer Functions
+
+    private void StartTimer()
     {
         timer = StartCoroutine(timerCoroutine());
     }
 
-    public void StopTimer()
+    private void StopTimer()
     {
         StopCoroutine(timer);
     }
@@ -84,5 +108,7 @@ public class Game : Singleton<Game>
             LevelTimer += 1f;
         }
     }
+
+    #endregion
 
 }

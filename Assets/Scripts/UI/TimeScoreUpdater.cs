@@ -19,6 +19,7 @@ public class TimeScoreUpdater : MonoBehaviour
         timerText.text = GetFormattedTimer();
     }
 
+    // TODO move this to a util function
     private string GetFormattedTimer()
     {
         float timer = game.LevelTimer;

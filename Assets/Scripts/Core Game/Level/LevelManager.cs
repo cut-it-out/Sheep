@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] List<GameObject> levels = new List<GameObject>();
 
@@ -91,5 +91,10 @@ public class LevelManager : MonoBehaviour
     {
         return Instantiate(levelPrefab, basePosition, Quaternion.identity);
 
+    }
+
+    public int LevelCount()
+    {
+        return levels.Count;
     }
 }
