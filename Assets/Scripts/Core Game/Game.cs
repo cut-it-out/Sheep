@@ -102,6 +102,7 @@ public class Game : Singleton<Game>
 
     IEnumerator timerCoroutine()
     {
+        LevelTimer = 0f;
         while (true)
         {
             yield return new WaitForSeconds(1f);
