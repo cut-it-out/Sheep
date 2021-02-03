@@ -89,7 +89,9 @@ public class LevelManager : Singleton<LevelManager>
 
     private GameObject InstantiateLevel(GameObject levelPrefab)
     {
-        return Instantiate(levelPrefab, basePosition, Quaternion.identity);
+        GameObject go = Instantiate(levelPrefab, basePosition, Quaternion.identity);
+        go.name = levelPrefab.name;
+        return go;
 
     }
 
