@@ -8,7 +8,9 @@ public enum ButtonType
     PAUSE_GAME,
     RESUME_GAME,
     RESTART_LEVEL,
-    MAIN_MENU
+    MAIN_MENU,
+    LEVELPANEL_NEXT,
+    LEVELPANEL_BACK
 }
 
 [RequireComponent(typeof(Button))]
@@ -54,6 +56,10 @@ public class ButtonController : MonoBehaviour
             case ButtonType.MAIN_MENU:
                 game.PauseGame();
                 canvasManager.SwitchCanvas(CanvasType.MainMenu);
+                break;
+            case ButtonType.LEVELPANEL_NEXT:
+                break;
+            case ButtonType.LEVELPANEL_BACK:
                 break;
             default:
                 break;
