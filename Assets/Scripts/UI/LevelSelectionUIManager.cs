@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class LevelSelectionUIManager : MonoBehaviour
 {
-    public int totalLevel = 5;
-    public int unlockedLevel = 1;
 
     private LevelButtonController[] levelButtons;
 
+    private int totalLevel = 0;
     private int totalPage;
     private int page = 0;
     private int pageItem = 15;
@@ -16,19 +15,34 @@ public class LevelSelectionUIManager : MonoBehaviour
     public GameObject nextButton;
     public GameObject backButton;
 
+    Game game;
+
+    private void OnEnable()
+    {
+        Debug.Log("onEnable");
+    }
+
     private void Start()
     {
+        Debug.Log("Start");
+        totalLevel = LevelManager.GetInstance().LevelCount();
         levelButtons = GetComponentsInChildren<LevelButtonController>();
-        Refresh();
+        game = Game.GetInstance();
+        
+        // TODO: don't know why but if I didn't trigger a click
+        // simple calling Refresh() does not do a proper refresh somehow...
+        Invoke("ClickNext", 0f);
     }
 
     public void StartLevel(int level)
     {
-        // TODO add here the level load stuff
+        Debug.Log("StartLevel: " + (level-1));
+        game.LoadNextLevel(level - 1);
     }
 
     public void ClickNext()
     {
+        Debug.Log("ClickNext triggered");
         page = Mathf.Clamp(page + 1, 0, totalPage);
         Refresh();
     }
@@ -41,6 +55,7 @@ public class LevelSelectionUIManager : MonoBehaviour
 
     public void Refresh()
     {
+        Debug.Log("Refresh triggered");
         totalPage = totalLevel / pageItem;
         int index = page * pageItem;
         for (int i = 0; i < levelButtons.Length; i++)
@@ -49,7 +64,7 @@ public class LevelSelectionUIManager : MonoBehaviour
             if (level <= totalLevel)
             {
                 levelButtons[i].gameObject.SetActive(true);
-                levelButtons[i].Setup(level, level <= unlockedLevel);
+                levelButtons[i].Setup(level, game.HighestLevelFinished == 0 ? true : i <= game.HighestLevelFinished);
             }
             else
             {

@@ -8,6 +8,7 @@ public class Game : Singleton<Game>
     public float LevelTimer { get; private set; }
     public bool IsPaused { get; private set; }
     public GameData Data { get; private set; }
+    public int HighestLevelFinished { get; private set; }
 
     Coroutine timer;
     CanvasManager canvasManager;
@@ -28,16 +29,28 @@ public class Game : Singleton<Game>
             Debug.Log("setup new GameData()");
             Data = new GameData(levelManager.LevelCount());
         }
+        // check for highest level achieved
+        for (int i = 0; i < Data.levelNames.Length; i++)
+        {
+            if (Data.levelNames[i] == "")
+            {
+                HighestLevelFinished = 
+                    i == 0 
+                    ? i 
+                    : i - 1;
+            }
+        }
+
 
 //        DataManager.SaveData(Data);
     }
 
     #region Game State Related Functions
 
-    public void LoadNextLevel()
+    public void LoadNextLevel(int level = -1)
     {
         Debug.Log("levelManager.LoadLevel();");
-        levelManager.LoadLevel();
+        levelManager.LoadLevel(level);
         Debug.Log("player.MoveToStartPosition(levelManager.PlayerStartTransform);");
         player.MoveToStartPosition(levelManager.PlayerStartTransform);
         IsPaused = false;

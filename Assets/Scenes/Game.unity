@@ -2060,8 +2060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b3bb61ae363eb40a2492ad1faa6d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalLevel: 20
-  unlockedLevel: 6
   nextButton: {fileID: 3155403161529947846}
   backButton: {fileID: 3155403162280243759}
 --- !u!114 &888516653
@@ -2874,6 +2872,10 @@ PrefabInstance:
     - target: {fileID: 4512793831986978906, guid: a3cd581ab3fccf14583ff2715852a5b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775169190261618927, guid: a3cd581ab3fccf14583ff2715852a5b3, type: 3}
+      propertyPath: buttonType
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8802984093714187881, guid: a3cd581ab3fccf14583ff2715852a5b3, type: 3}
       propertyPath: m_text

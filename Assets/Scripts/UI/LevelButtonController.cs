@@ -12,11 +12,14 @@ public class LevelButtonController : MonoBehaviour
     private Button button;
     private Image image;
 
+    LevelSelectionUIManager levelSelectionManager;
+
     private void Start()
     {
         button = GetComponentInChildren<Button>();
         image = button.GetComponent<Image>();
         levelText = GetComponentInChildren<TMP_Text>();
+        levelSelectionManager = GetComponentInParent<LevelSelectionUIManager>();
     }
 
     public void Setup(int _level, bool _isUnlocked)
@@ -40,6 +43,7 @@ public class LevelButtonController : MonoBehaviour
 
     public void OnClick()
     {
-        //TODO
+        Debug.Log("level click: " + level);
+        levelSelectionManager.StartLevel(level);
     }
 }
