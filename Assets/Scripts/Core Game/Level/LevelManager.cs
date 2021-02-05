@@ -54,7 +54,7 @@ public class LevelManager : Singleton<LevelManager>
         Debug.Log("UpdatePlayerStart()");
         if (CurrentLevelObject != null)
         {
-            Debug.Log("UpdatePlayerStart() -- CurrentLevelObject != null");
+            //Debug.Log("UpdatePlayerStart() -- CurrentLevelObject != null");
             PlayerStartTransform = CurrentLevelObject.GetComponentInChildren<PlayerStart>().Get();
         }
     }

@@ -19,12 +19,12 @@ public class LevelSelectionUIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("onEnable");
+        //Debug.Log("onEnable");
     }
 
     private void Start()
     {
-        Debug.Log("Start");
+        //Debug.Log("Start");
         totalLevel = LevelManager.GetInstance().LevelCount();
         levelButtons = GetComponentsInChildren<LevelButtonController>();
         game = Game.GetInstance();
@@ -42,7 +42,7 @@ public class LevelSelectionUIManager : MonoBehaviour
 
     public void ClickNext()
     {
-        Debug.Log("ClickNext triggered");
+        //Debug.Log("ClickNext triggered");
         page = Mathf.Clamp(page + 1, 0, totalPage);
         Refresh();
     }
@@ -55,7 +55,7 @@ public class LevelSelectionUIManager : MonoBehaviour
 
     public void Refresh()
     {
-        Debug.Log("Refresh triggered");
+        //Debug.Log("Refresh triggered");
         totalPage = totalLevel / pageItem;
         int index = page * pageItem;
         for (int i = 0; i < levelButtons.Length; i++)
