@@ -16,14 +16,9 @@ public class LevelSelectionUIManager : MonoBehaviour
     public GameObject nextButton;
     public GameObject backButton;
 
-    private void OnEnable()
-    {
-        levelButtons = GetComponentsInChildren<LevelButtonController>();
-
-    }
-
     private void Start()
     {
+        levelButtons = GetComponentsInChildren<LevelButtonController>();
         Refresh();
     }
 
@@ -34,13 +29,13 @@ public class LevelSelectionUIManager : MonoBehaviour
 
     public void ClickNext()
     {
-        page++;
+        page = Mathf.Clamp(page + 1, 0, totalPage);
         Refresh();
     }
     
     public void ClickBack()
     {
-        page--;
+        page = Mathf.Clamp(page - 1,0,totalPage);
         Refresh();
     }
 

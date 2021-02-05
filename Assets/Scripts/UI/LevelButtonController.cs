@@ -12,7 +12,7 @@ public class LevelButtonController : MonoBehaviour
     private Button button;
     private Image image;
 
-    private void OnEnable()
+    private void Start()
     {
         button = GetComponentInChildren<Button>();
         image = button.GetComponent<Image>();

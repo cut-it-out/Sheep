@@ -2060,8 +2060,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09b3bb61ae363eb40a2492ad1faa6d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalLevel: 5
-  unlockedLevel: 1
+  totalLevel: 20
+  unlockedLevel: 6
   nextButton: {fileID: 3155403161529947846}
   backButton: {fileID: 3155403162280243759}
 --- !u!114 &888516653
@@ -4084,15 +4084,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7178289106933342097, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.72
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7178289106933342097, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7178289106933342097, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.74
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7178289106933342097, guid: 063b073abdf44384b8e7fa7ca52e29f2, type: 3}
       propertyPath: m_LocalRotation.w
