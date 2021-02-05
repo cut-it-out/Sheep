@@ -53,7 +53,7 @@ public class ButtonController : MonoBehaviour
                 canvasManager.SwitchCanvas(CanvasType.GameUI);
                 break;
             case ButtonType.MAIN_MENU:
-                game.PauseGame();
+                game.UnloadLevel();
                 canvasManager.SwitchCanvas(CanvasType.MainMenu);
                 break;
             case ButtonType.LEVEL:

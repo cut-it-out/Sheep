@@ -36,11 +36,7 @@ public class LevelManager : Singleton<LevelManager>
         }
 
         // load desired level
-        if (CurrentLevelObject != null)
-        {
-            Debug.Log("Destroy(CurrentLevelObject);");
-            Destroy(CurrentLevelObject);
-        }
+        UnloadLevel();
         CurrentLevelObject = InstantiateLevel(levels[CurrentLevelIndex]);
 
         Debug.Log("CurrentLevelIndex: " + CurrentLevelIndex);
@@ -56,6 +52,15 @@ public class LevelManager : Singleton<LevelManager>
         {
             //Debug.Log("UpdatePlayerStart() -- CurrentLevelObject != null");
             PlayerStartTransform = CurrentLevelObject.GetComponentInChildren<PlayerStart>().Get();
+        }
+    }
+
+    public void UnloadLevel()
+    {
+        if (CurrentLevelObject != null)
+        {
+            Debug.Log("Destroy(CurrentLevelObject);");
+            Destroy(CurrentLevelObject);
         }
     }
 

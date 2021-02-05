@@ -49,6 +49,7 @@ public class Game : Singleton<Game>
 
     public void LoadNextLevel(int level = -1)
     {
+        ResumeGame(); // to make sure we don't stuck in pause
         Debug.Log("levelManager.LoadLevel();");
         levelManager.LoadLevel(level);
         Debug.Log("player.MoveToStartPosition(levelManager.PlayerStartTransform);");
@@ -65,6 +66,7 @@ public class Game : Singleton<Game>
         player.MoveToStartPosition(levelManager.PlayerStartTransform);
         IsPaused = false;
         StartTimer();
+        ResumeGame(); // to make sure we don't stuck in pause
     }
 
     public void LevelFinished(Level level)
@@ -92,6 +94,13 @@ public class Game : Singleton<Game>
         Time.timeScale = 1f;
         IsPaused = false;
     }
+
+    public void UnloadLevel()
+    {
+        StopTimer();
+        IsPaused = true;
+        levelManager.UnloadLevel();
+    }
     
     public void QuitGame()
     {
@@ -105,12 +114,20 @@ public class Game : Singleton<Game>
 
     private void StartTimer()
     {
+        if (timer != null) // check to only have one timer running
+        {
+            StopCoroutine(timer);
+        }
         timer = StartCoroutine(timerCoroutine());
     }
 
     private void StopTimer()
     {
-        StopCoroutine(timer);
+        if (timer != null)
+        {
+            StopCoroutine(timer);
+        }
+        timer = null;
     }
 
     IEnumerator timerCoroutine()
