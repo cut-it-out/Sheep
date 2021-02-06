@@ -20,6 +20,10 @@ public class LevelSelectionUIManager : MonoBehaviour
     private void OnEnable()
     {
         //Debug.Log("onEnable");
+        if (game != null)
+        {
+            Refresh();
+        }
     }
 
     private void Start()
