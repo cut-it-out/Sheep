@@ -3,6 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class LevelResult
+{
+    public int levelIndex;
+    public string levelName;
+    public int levelStar;
+    public float levelTime;
+
+    public LevelResult(int _levelIndex = 0, string _levelName = null, int _levelStar = 0, float _levelTime = 0f)
+    {
+        levelIndex = _levelIndex;
+        levelName = _levelName;
+        levelStar = _levelStar;
+        levelTime = _levelTime;
+    }
+}
+
 public class Game : Singleton<Game>
 {
     public float LevelTimer { get; private set; }
@@ -11,6 +27,8 @@ public class Game : Singleton<Game>
     public int HighestLevelFinished { get; private set; }
     public int NextLevelToLoad { get; private set; }
 
+    public LevelResult LevelResults { get; private set; }
+    
     Coroutine timer;
     CanvasManager canvasManager;
     LevelManager levelManager;
@@ -23,6 +41,8 @@ public class Game : Singleton<Game>
         player = Player.GetInstance();
         IsPaused = true;
 
+        LevelResults = new LevelResult();
+        
         // load previous saves if they exist
         Data = DataManager.LoadData();
         if (Data == null)
@@ -30,12 +50,10 @@ public class Game : Singleton<Game>
             Debug.Log("setup new GameData()");
             Data = new GameData(levelManager.LevelCount());
         }
+
         // check for highest level achieved
         HandleWhichLevelComesNext();
-        
-        
 
-        //        DataManager.SaveData(Data);
     }
 
     private void HandleWhichLevelComesNext()
@@ -64,6 +82,7 @@ public class Game : Singleton<Game>
 
     public void LoadNextLevel(int level = -1)
     {
+        SetLevelResults(true); // reset saved results
         ResumeGame(); // to make sure we don't stuck in pause
         Debug.Log($"levelManager.LoadLevel({level})");
         levelManager.LoadLevel(level);
@@ -94,10 +113,29 @@ public class Game : Singleton<Game>
         Data.levelTimes[levelManager.CurrentLevelIndex] = LevelTimer;
         Data.levelStars[levelManager.CurrentLevelIndex] = level.HowManyStars(LevelTimer);
         DataManager.SaveData(Data);
+        SetLevelResults();
+
         Debug.Log("HighestLevelFinished: " + HighestLevelFinished);
         HandleWhichLevelComesNext();
 
         canvasManager.SwitchCanvas(CanvasType.LevelFinished);
+    }
+
+    public void SetLevelResults(bool reset = false)
+    {
+        if (reset)
+        {
+            LevelResults = new LevelResult();
+        }
+        else
+        {
+            LevelResults = new LevelResult(
+                levelManager.CurrentLevelIndex,
+                Data.levelNames[levelManager.CurrentLevelIndex],
+                Data.levelStars[levelManager.CurrentLevelIndex],
+                Data.levelTimes[levelManager.CurrentLevelIndex]
+                );
+        }
     }
 
     public void PauseGame()

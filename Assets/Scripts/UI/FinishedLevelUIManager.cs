@@ -9,6 +9,11 @@ public class FinishedLevelUIManager : MonoBehaviour
     [SerializeField] TMP_Text stars;
     [SerializeField] GameObject nextLevelButton;
 
+    private void Start()
+    {
+        
+    }
+
     private void OnEnable()
     {
         //TODO move cached vars out?
@@ -17,16 +22,9 @@ public class FinishedLevelUIManager : MonoBehaviour
 
         if (levelManager.CurrentLevelObject)
         {
-            timerText.text = GetFormattedTimer(game.Data.levelTimes[levelManager.CurrentLevelIndex]);
-            stars.text = game.Data.levelStars[levelManager.CurrentLevelIndex].ToString() + " Stars";
-            if (levelManager.LastLevel)
-            {
-                nextLevelButton.SetActive(false);
-            }
-            else
-            {
-                nextLevelButton.SetActive(true);
-            }
+            timerText.text = GetFormattedTimer(game.LevelResults.levelTime);
+            stars.text = game.LevelResults.levelStar.ToString() + " Stars";
+            nextLevelButton.SetActive(!levelManager.LastLevel);
         }
     }
 
