@@ -9,6 +9,7 @@ public class Game : Singleton<Game>
     public bool IsPaused { get; private set; }
     public GameData Data { get; private set; }
     public int HighestLevelFinished { get; private set; }
+    public int NextLevelToLoad { get; private set; }
 
     Coroutine timer;
     CanvasManager canvasManager;
@@ -30,26 +31,33 @@ public class Game : Singleton<Game>
             Data = new GameData(levelManager.LevelCount());
         }
         // check for highest level achieved
-        UpdateHighestLevelFinished();
-        levelManager.UpdateLevelIndexes(HighestLevelFinished);
+        HandleWhichLevelComesNext();
+        
+        
 
         //        DataManager.SaveData(Data);
     }
 
-    private void UpdateHighestLevelFinished()
+    private void HandleWhichLevelComesNext()
     {
-        for (int i = 0; i < Data.levelNames.Length; i++)
+        int i = 0;
+        while (Data.levelStars[i] != 0 && i < Data.levelStars.Length)
         {
-            if (Data.levelNames[i] == "")
-            {
-                HighestLevelFinished =
-                    i == 0
-                    ? i
-                    : i - 1;
-                break;
-            }
+            Debug.Log($"Data.levelStars[{i}]='{Data.levelStars[i]}'");
+            i++;
         }
-        Debug.Log("HighestLevelFinished: " + HighestLevelFinished);
+
+        HighestLevelFinished = i - 1;
+        Debug.Log("HighestLevelFinished ELSE: " + HighestLevelFinished);
+        UpdateNextLevelToLoad();
+    }
+
+    private void UpdateNextLevelToLoad()
+    {
+        NextLevelToLoad = HighestLevelFinished + 1;
+        Debug.Log("NextLevelToLoad: " + NextLevelToLoad);
+        levelManager.SetCurrentLevelIndex(NextLevelToLoad);
+        Debug.Log("levelManager.CurrentLevelIndex: " + levelManager.CurrentLevelIndex);
     }
 
     #region Game State Related Functions
@@ -57,9 +65,8 @@ public class Game : Singleton<Game>
     public void LoadNextLevel(int level = -1)
     {
         ResumeGame(); // to make sure we don't stuck in pause
-        Debug.Log("levelManager.LoadLevel();");
+        Debug.Log($"levelManager.LoadLevel({level})");
         levelManager.LoadLevel(level);
-        Debug.Log("player.MoveToStartPosition(levelManager.PlayerStartTransform);");
         player.MoveToStartPosition(levelManager.PlayerStartTransform);
         IsPaused = false;
         StartTimer();
@@ -87,7 +94,8 @@ public class Game : Singleton<Game>
         Data.levelTimes[levelManager.CurrentLevelIndex] = LevelTimer;
         Data.levelStars[levelManager.CurrentLevelIndex] = level.HowManyStars(LevelTimer);
         DataManager.SaveData(Data);
-        UpdateHighestLevelFinished();
+        Debug.Log("HighestLevelFinished: " + HighestLevelFinished);
+        HandleWhichLevelComesNext();
 
         canvasManager.SwitchCanvas(CanvasType.LevelFinished);
     }

@@ -34,7 +34,7 @@ public class ButtonController : MonoBehaviour
         switch (buttonType)
         {
             case ButtonType.START_GAME:
-                game.LoadNextLevel(game.HighestLevelFinished); // load first/next level
+                game.LoadNextLevel(); // load first/next level
                 canvasManager.SwitchCanvas(CanvasType.GameUI);
                 break;
             case ButtonType.SELECT_LEVEL:

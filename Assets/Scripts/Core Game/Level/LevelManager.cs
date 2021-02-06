@@ -12,7 +12,6 @@ public class LevelManager : Singleton<LevelManager>
 
     public GameObject CurrentLevelObject { get; private set; }
     public int CurrentLevelIndex { get; private set; }
-    public int NextLevelIndex { get; private set; }
     public bool LastLevel { get; private set; }
     public Transform PlayerStartTransform { get; private set; }
 
@@ -23,18 +22,11 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LoadLevel(int levelIndex = -1)
     {
-        // check and update indexes
-        if (levelIndex != -1) // if specific level needs to load
+        if (levelIndex != -1) // if specific level needs to load update indicator
         {
-            UpdateLevelIndexes(levelIndex);
-        }
-        //else if (CurrentLevelObject == null) // if first level load in game
-        //{
-        //    UpdateLevelIndexes(0);
-        //}
-        else
-        {
-            UpdateLevelIndexes();
+            Debug.Log($"UpdateLevelIndexes({levelIndex})");
+            if (!SetCurrentLevelIndex(levelIndex))
+                return;
         }
 
         // load desired level
@@ -43,16 +35,15 @@ public class LevelManager : Singleton<LevelManager>
 
         Debug.Log("CurrentLevelIndex: " + CurrentLevelIndex);
 
-        // update start pos
-        UpdatePlayerStart();
-
         // update navmesh
         surface.BuildNavMesh();
+
+        // update start pos
+        UpdatePlayerStart();
     }
     
     private void UpdatePlayerStart()
     {
-        Debug.Log("UpdatePlayerStart()");
         if (CurrentLevelObject != null)
         {
             //Debug.Log("UpdatePlayerStart() -- CurrentLevelObject != null");
@@ -69,31 +60,20 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    public void UpdateLevelIndexes(int levelIndex = -1)
+    public bool SetCurrentLevelIndex(int levelIndex)
     {
-        if (levelIndex != -1 && levelIndex < levels.Count)
-        {
-            CurrentLevelIndex = levelIndex;
-        }
-        else
-        {
-            if (!LastLevel)
-            {
-                CurrentLevelIndex++;
-            }
-        }
         
         if (CurrentLevelIndex < levels.Count)
         {
-            if (CurrentLevelIndex + 1 < levels.Count)
-            {
-                NextLevelIndex = CurrentLevelIndex + 1;
-            }
-            else
-            {
-                LastLevel = true;
-            }
-
+            CurrentLevelIndex = levelIndex;
+            LastLevel = CurrentLevelIndex + 1 >= levels.Count;
+            Debug.Log($"CurrentLevelIndex:{CurrentLevelIndex} - LastLevel:{LastLevel}");
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning($"CurrentLevelIndex({levelIndex}) cannot be higher then level count ({levels.Count})");
+            return false;
         }
     }
 
