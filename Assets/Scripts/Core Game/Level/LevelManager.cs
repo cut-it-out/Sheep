@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LevelManager : Singleton<LevelManager>
 {
+    [SerializeField] NavMeshSurface surface;
     [SerializeField] List<GameObject> levels = new List<GameObject>();
 
     Vector3 basePosition = new Vector3(0f, 0f, 0f);
@@ -26,10 +28,10 @@ public class LevelManager : Singleton<LevelManager>
         {
             UpdateLevelIndexes(levelIndex);
         }
-        else if (CurrentLevelObject == null) // if first level load in game
-        {
-            UpdateLevelIndexes(0);
-        }
+        //else if (CurrentLevelObject == null) // if first level load in game
+        //{
+        //    UpdateLevelIndexes(0);
+        //}
         else
         {
             UpdateLevelIndexes();
@@ -43,6 +45,9 @@ public class LevelManager : Singleton<LevelManager>
 
         // update start pos
         UpdatePlayerStart();
+
+        // update navmesh
+        surface.BuildNavMesh();
     }
     
     private void UpdatePlayerStart()
@@ -64,7 +69,7 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
-    private void UpdateLevelIndexes(int levelIndex = -1)
+    public void UpdateLevelIndexes(int levelIndex = -1)
     {
         if (levelIndex != -1 && levelIndex < levels.Count)
         {

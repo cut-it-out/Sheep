@@ -21,7 +21,7 @@ public class Game : Singleton<Game>
         levelManager = LevelManager.GetInstance();
         player = Player.GetInstance();
         IsPaused = true;
-        
+
         // load previous saves if they exist
         Data = DataManager.LoadData();
         if (Data == null)
@@ -30,19 +30,26 @@ public class Game : Singleton<Game>
             Data = new GameData(levelManager.LevelCount());
         }
         // check for highest level achieved
+        UpdateHighestLevelFinished();
+        levelManager.UpdateLevelIndexes(HighestLevelFinished);
+
+        //        DataManager.SaveData(Data);
+    }
+
+    private void UpdateHighestLevelFinished()
+    {
         for (int i = 0; i < Data.levelNames.Length; i++)
         {
             if (Data.levelNames[i] == "")
             {
-                HighestLevelFinished = 
-                    i == 0 
-                    ? i 
+                HighestLevelFinished =
+                    i == 0
+                    ? i
                     : i - 1;
+                break;
             }
         }
-
-
-//        DataManager.SaveData(Data);
+        Debug.Log("HighestLevelFinished: " + HighestLevelFinished);
     }
 
     #region Game State Related Functions
@@ -75,10 +82,12 @@ public class Game : Singleton<Game>
         IsPaused = true;
 
         //save game data
+        Debug.Log("saving data for level " + levelManager.CurrentLevelIndex);
         Data.levelNames[levelManager.CurrentLevelIndex] = levelManager.CurrentLevelObject.name;
         Data.levelTimes[levelManager.CurrentLevelIndex] = LevelTimer;
         Data.levelStars[levelManager.CurrentLevelIndex] = level.HowManyStars(LevelTimer);
         DataManager.SaveData(Data);
+        UpdateHighestLevelFinished();
 
         canvasManager.SwitchCanvas(CanvasType.LevelFinished);
     }
