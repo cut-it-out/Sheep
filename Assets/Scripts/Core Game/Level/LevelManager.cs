@@ -24,7 +24,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (levelIndex != -1) // if specific level needs to load update indicator
         {
-            Debug.Log($"UpdateLevelIndexes({levelIndex})");
+            //Debug.Log($"UpdateLevelIndexes({levelIndex})");
             if (!SetCurrentLevelIndex(levelIndex))
                 return;
         }
@@ -33,7 +33,7 @@ public class LevelManager : Singleton<LevelManager>
         UnloadLevel();
         CurrentLevelObject = InstantiateLevel(levels[CurrentLevelIndex]);
 
-        Debug.Log("CurrentLevelIndex: " + CurrentLevelIndex);
+        //Debug.Log("CurrentLevelIndex: " + CurrentLevelIndex);
 
         // update navmesh
         surface.BuildNavMesh();
@@ -55,7 +55,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (CurrentLevelObject != null)
         {
-            Debug.Log("Destroy(CurrentLevelObject);");
+            //Debug.Log("Destroy(CurrentLevelObject);");
             Destroy(CurrentLevelObject);
         }
     }
@@ -67,7 +67,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             CurrentLevelIndex = levelIndex;
             LastLevel = CurrentLevelIndex + 1 >= levels.Count;
-            Debug.Log($"CurrentLevelIndex:{CurrentLevelIndex} - LastLevel:{LastLevel}");
+            //Debug.Log($"CurrentLevelIndex:{CurrentLevelIndex} - LastLevel:{LastLevel}");
             return true;
         }
         else

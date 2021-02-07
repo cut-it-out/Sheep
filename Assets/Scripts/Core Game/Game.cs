@@ -61,12 +61,10 @@ public class Game : Singleton<Game>
         int i = 0;
         while (Data.levelStars[i] != 0 && i < Data.levelStars.Length)
         {
-            Debug.Log($"Data.levelStars[{i}]='{Data.levelStars[i]}'");
             i++;
         }
 
         HighestLevelFinished = i - 1;
-        Debug.Log("HighestLevelFinished ELSE: " + HighestLevelFinished);
         UpdateNextLevelToLoad();
     }
 
@@ -75,7 +73,6 @@ public class Game : Singleton<Game>
         NextLevelToLoad = HighestLevelFinished + 1;
         Debug.Log("NextLevelToLoad: " + NextLevelToLoad);
         levelManager.SetCurrentLevelIndex(NextLevelToLoad);
-        Debug.Log("levelManager.CurrentLevelIndex: " + levelManager.CurrentLevelIndex);
     }
 
     #region Game State Related Functions
@@ -108,14 +105,14 @@ public class Game : Singleton<Game>
         IsPaused = true;
 
         //save game data
-        Debug.Log("saving data for level " + levelManager.CurrentLevelIndex);
+        //Debug.Log("saving data for level " + levelManager.CurrentLevelIndex);
         Data.levelNames[levelManager.CurrentLevelIndex] = levelManager.CurrentLevelObject.name;
         Data.levelTimes[levelManager.CurrentLevelIndex] = LevelTimer;
         Data.levelStars[levelManager.CurrentLevelIndex] = level.HowManyStars(LevelTimer);
         DataManager.SaveData(Data);
         SetLevelResults();
 
-        Debug.Log("HighestLevelFinished: " + HighestLevelFinished);
+        //Debug.Log("HighestLevelFinished: " + HighestLevelFinished);
         HandleWhichLevelComesNext();
 
         canvasManager.SwitchCanvas(CanvasType.LevelFinished);
@@ -148,6 +145,7 @@ public class Game : Singleton<Game>
     {
         Time.timeScale = 1f;
         IsPaused = false;
+        player.WarpToStartPosition(player.transform); // to disregard menu clicks stuck in movement que
     }
 
     public void UnloadLevel()
