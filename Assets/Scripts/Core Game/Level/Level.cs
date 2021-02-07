@@ -6,6 +6,7 @@ public class Level : MonoBehaviour
 {
     [SerializeField] float twoStarTime = 60f;
 
+    private bool targetIsMet = false;
     Game game;
 
     private void Start()
@@ -32,7 +33,11 @@ public class Level : MonoBehaviour
 
     public void TargetIsMet()
     {
-        game.LevelFinished(this);
+        if (!targetIsMet)
+        {
+            game.LevelFinished(this);
+            targetIsMet = true;
+        }
     }
 
 }
