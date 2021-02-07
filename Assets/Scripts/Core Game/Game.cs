@@ -86,7 +86,7 @@ public class Game : Singleton<Game>
         ResumeGame(); // to make sure we don't stuck in pause
         Debug.Log($"levelManager.LoadLevel({level})");
         levelManager.LoadLevel(level);
-        player.MoveToStartPosition(levelManager.PlayerStartTransform);
+        player.WarpToStartPosition(levelManager.PlayerStartTransform);
         IsPaused = false;
         StartTimer();
     }
@@ -96,7 +96,7 @@ public class Game : Singleton<Game>
         StopTimer();
         IsPaused = true;
         levelManager.LoadLevel(levelManager.CurrentLevelIndex);
-        player.MoveToStartPosition(levelManager.PlayerStartTransform);
+        player.WarpToStartPosition(levelManager.PlayerStartTransform);
         IsPaused = false;
         StartTimer();
         ResumeGame(); // to make sure we don't stuck in pause

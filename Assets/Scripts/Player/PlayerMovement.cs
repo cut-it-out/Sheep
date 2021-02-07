@@ -50,8 +50,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void MovePlayer(Vector3 moveToPos)
+    public void MovePlayer(Vector3 moveToPos, bool warp = false)
     {
-        agent.SetDestination(moveToPos);
+        if (warp)
+        {
+            agent.Warp(moveToPos);
+        }
+        else
+        {
+            agent.SetDestination(moveToPos);
+        }
     }
 }

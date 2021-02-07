@@ -17,4 +17,11 @@ public class Player : Singleton<Player>
         gameObject.transform.rotation = tf.rotation;
         playerMovement.MovePlayer(tf.position);
     }
+    
+    public void WarpToStartPosition(Transform tf)
+    {
+        gameObject.transform.position = tf.position;
+        gameObject.transform.rotation = tf.rotation;
+        playerMovement.MovePlayer(tf.position, true);
+    }
 }
