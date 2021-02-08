@@ -6,7 +6,7 @@ using TMPro;
 public class FinishedLevelUIManager : MonoBehaviour
 {
     [SerializeField] TMP_Text timerText;
-    [SerializeField] TMP_Text stars;
+    [SerializeField] StarManager starManager;
     [SerializeField] GameObject nextLevelButton;
 
     private void Start()
@@ -23,7 +23,7 @@ public class FinishedLevelUIManager : MonoBehaviour
         if (levelManager.CurrentLevelObject)
         {
             timerText.text = GetFormattedTimer(game.LevelResults.levelTime);
-            stars.text = game.LevelResults.levelStar.ToString() + " Stars";
+            starManager.Setup(game.LevelResults.levelStar);
             nextLevelButton.SetActive(!levelManager.LastLevel);
         }
     }
