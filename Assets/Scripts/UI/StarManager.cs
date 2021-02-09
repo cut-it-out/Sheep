@@ -11,7 +11,7 @@ public class StarManager : MonoBehaviour
 
     List<StarController> starControllers;
 
-    void Start()
+    void OnEnable()
     {
         starControllers = GetComponentsInChildren<StarController>().ToList();
     }
