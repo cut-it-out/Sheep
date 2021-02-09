@@ -24,7 +24,7 @@ public class FinishedLevelUIManager : MonoBehaviour
         {
             timerText.text = GetFormattedTimer(game.LevelResults.levelTime);
             starManager.Setup(game.LevelResults.levelStar);
-            nextLevelButton.SetActive(!levelManager.LastLevel);
+            nextLevelButton.SetActive(!game.LevelResults.lastLevel);
         }
     }
 

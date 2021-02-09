@@ -9,13 +9,15 @@ public class LevelResult
     public string levelName;
     public int levelStar;
     public float levelTime;
+    public bool lastLevel;
 
-    public LevelResult(int _levelIndex = 0, string _levelName = null, int _levelStar = 0, float _levelTime = 0f)
+    public LevelResult(int _levelIndex = 0, string _levelName = null, int _levelStar = 0, float _levelTime = 0f, bool _lastLevel = false)
     {
         levelIndex = _levelIndex;
         levelName = _levelName;
         levelStar = _levelStar;
         levelTime = _levelTime;
+        lastLevel = _lastLevel;
     }
 }
 
@@ -43,6 +45,7 @@ public class Game : Singleton<Game>
 
         LevelResults = new LevelResult();
         
+
         // load previous saves if they exist
         Data = DataManager.LoadData();
         if (Data == null)
@@ -59,12 +62,19 @@ public class Game : Singleton<Game>
     private void HandleWhichLevelComesNext()
     {
         int i = 0;
-        while (Data.levelStars[i] != 0 && i < Data.levelStars.Length)
+        while (i < Data.levelStars.Length)
         {
-            i++;
+            if (Data.levelStars[i] != 0)
+            {
+                i++;
+            }
+            else
+            {
+                break;
+            }
         }
 
-        HighestLevelFinished = i - 1;
+        HighestLevelFinished = i < Data.levelStars.Length ? i - 1 : Data.levelStars.Length - 2;
         UpdateNextLevelToLoad();
     }
 
@@ -130,7 +140,8 @@ public class Game : Singleton<Game>
                 levelManager.CurrentLevelIndex,
                 Data.levelNames[levelManager.CurrentLevelIndex],
                 Data.levelStars[levelManager.CurrentLevelIndex],
-                Data.levelTimes[levelManager.CurrentLevelIndex]
+                Data.levelTimes[levelManager.CurrentLevelIndex],
+                levelManager.LastLevel
                 );
         }
     }
