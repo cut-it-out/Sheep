@@ -55,7 +55,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (CurrentLevelObject != null)
         {
-            //Debug.Log("Destroy(CurrentLevelObject);");
+            Debug.Log("Unloading level");
             Destroy(CurrentLevelObject);
         }
     }

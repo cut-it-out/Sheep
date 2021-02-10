@@ -44,7 +44,9 @@ public class Game : Singleton<Game>
         IsPaused = true;
 
         LevelResults = new LevelResult();
-        
+
+        //disable player to stop from dropping
+        player.gameObject.SetActive(false);
 
         // load previous saves if they exist
         Data = DataManager.LoadData();
@@ -154,6 +156,7 @@ public class Game : Singleton<Game>
 
     public void ResumeGame()
     {
+        player.gameObject.SetActive(true);
         Time.timeScale = 1f;
         IsPaused = false;
         player.WarpToStartPosition(player.transform); // to disregard menu clicks stuck in movement que
@@ -164,6 +167,7 @@ public class Game : Singleton<Game>
         StopTimer();
         IsPaused = true;
         levelManager.UnloadLevel();
+        player.gameObject.SetActive(false);
     }
     
     public void QuitGame()
