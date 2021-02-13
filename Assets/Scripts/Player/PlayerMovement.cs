@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
 
     NavMeshAgent agent;
     Game game;
+    Animator anim;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
         game = Game.GetInstance();
     }
 
@@ -48,6 +50,19 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
+
+
+        // TODO maybe move it to separate script?
+        // handling walk Animation 
+        if (Math.Abs(agent.velocity.x + agent.velocity.y + agent.velocity.z) > .05f)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else
+        {
+            anim.SetBool("isWalking", false);
+        }
+
     }
 
     public void MovePlayer(Vector3 moveToPos, bool warp = false)

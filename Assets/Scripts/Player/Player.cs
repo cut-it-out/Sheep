@@ -22,6 +22,11 @@ public class Player : Singleton<Player>
     {
         gameObject.transform.position = tf.position;
         gameObject.transform.rotation = tf.rotation;
+        if (playerMovement)
+        {
+            Debug.Log("playermovement is ok");
+        } else
+            Debug.Log("playermovement missing!!!!!!!!!!!!!!!!");
         playerMovement.MovePlayer(tf.position, true);
     }
 }
