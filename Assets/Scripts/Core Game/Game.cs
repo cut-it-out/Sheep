@@ -172,8 +172,11 @@ public class Game : Singleton<Game>
     
     public void QuitGame()
     {
-        // TODO handle saving if needed
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     #endregion

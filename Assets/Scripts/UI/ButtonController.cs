@@ -9,7 +9,8 @@ public enum ButtonType
     RESUME_GAME,
     RESTART_LEVEL,
     MAIN_MENU,
-    LEVEL
+    LEVEL,
+    QUIT
 }
 
 [RequireComponent(typeof(Button))]
@@ -58,6 +59,9 @@ public class ButtonController : MonoBehaviour
                 break;
             case ButtonType.LEVEL:
                 canvasManager.SwitchCanvas(CanvasType.GameUI);
+                break;
+            case ButtonType.QUIT:
+                game.QuitGame();
                 break;
             default:
                 break;
