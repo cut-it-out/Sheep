@@ -6,26 +6,49 @@ public class AudioManager : Singleton<AudioManager>
 {
     [SerializeField] AudioSource sheepAudioSource;
     [SerializeField] AudioSource musicAudioSource;
+    [SerializeField] AudioSource ambientAudioSource;
+    [SerializeField] AudioSource effectAudioSource;
 
-    [SerializeField] AudioClip sheepSound;    
+    [SerializeField] List<AudioClip> sheepSounds;
+    [SerializeField] float sheepSoundMinVol = 0.1f;
+    [SerializeField] float sheepSoundMaxVol = 0.6f;
+
+    [SerializeField] AudioClip dingSound;
+    [SerializeField] float dingVolume = 0.5f;
+
+
 
     public bool MusicEnabled { get; private set; }
+    public bool AmbientEnabled { get; private set; }
     public bool SoundEnabled { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
         MusicEnabled = true;
+        AmbientEnabled = true;
         SoundEnabled = true;
     }
 
-    public void SheepSound(float volume = 0.8f)
+    public void PlaySheepSound()
     {
         if (SoundEnabled)
         {
-            sheepAudioSource.PlayOneShot(sheepSound, volume);
+            if (!sheepAudioSource.isPlaying)
+            {
+                sheepAudioSource.PlayOneShot(sheepSounds[Random.Range(0, sheepSounds.Count)], Random.Range(sheepSoundMinVol, sheepSoundMaxVol));
+            }
+        }        
+    }
+
+    public void PlayDingSound()
+    {
+        if (SoundEnabled)
+        {
+            effectAudioSource.PlayOneShot(dingSound, dingVolume);
         }
     }
+
 
     public void SetMusic(bool isEnabled)
     {

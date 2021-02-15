@@ -24,6 +24,7 @@ public class Sheep : MonoBehaviour
     
     MeshRenderer meshRenderer;
     Coroutine randomMove;
+    AudioManager audioManager;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class Sheep : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         randomMove = StartCoroutine(RandomMove());
         meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        audioManager = AudioManager.GetInstance();
     }
 
     private void Update()
@@ -44,6 +46,8 @@ public class Sheep : MonoBehaviour
             Vector3 newPos = transform.position + dirToPlayer;
 
             agent.SetDestination(newPos);
+
+            audioManager.PlaySheepSound();
         }
     }
 
@@ -53,6 +57,7 @@ public class Sheep : MonoBehaviour
         {
             meshRenderer.material = onTargetMaterial;
             StopCoroutine(randomMove);
+            audioManager.PlayDingSound();
         }
     }
 
