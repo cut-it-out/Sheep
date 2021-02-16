@@ -43,7 +43,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6052a59c7ac7b5c46b04bc1aa8dcb0f8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -187,9 +187,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f2439b63167c1c44cabff4d18c7d89ea, type: 3}
   - {fileID: 8300000, guid: 447da49602f8bdf4482958f6017c6537, type: 3}
   sheepSoundMinVol: 0.2
-  sheepSoundMaxVol: 0.6
+  sheepSoundMaxVol: 0.5
   dingSound: {fileID: 8300000, guid: 64fb8afeea075e84693f43ad2ad44353, type: 3}
-  dingVolume: 0.4
+  dingVolume: 0.3
 --- !u!1 &2529425570194736236
 GameObject:
   m_ObjectHideFlags: 0
