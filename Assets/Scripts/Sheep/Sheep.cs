@@ -14,15 +14,9 @@ public class Sheep : MonoBehaviour
     [Header("Player Distance")]
     [SerializeField] float sheepPlayerDistance = 3f;
 
-    [Header("Materials for testing")]
-    [SerializeField] Material sheepMaterial;
-    [SerializeField] Material onTargetMaterial;
-
-
     private NavMeshAgent agent;
     private GameObject player;
     
-    MeshRenderer meshRenderer;
     Coroutine randomMove;
     AudioManager audioManager;
 
@@ -31,7 +25,6 @@ public class Sheep : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         randomMove = StartCoroutine(RandomMove());
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
         audioManager = AudioManager.GetInstance();
     }
 
@@ -55,14 +48,12 @@ public class Sheep : MonoBehaviour
     {
         if (other.gameObject.tag == "Target")
         {
-            meshRenderer.material = onTargetMaterial;
             StopCoroutine(randomMove);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        meshRenderer.material = sheepMaterial;
         randomMove = StartCoroutine(RandomMove());
     }
 
