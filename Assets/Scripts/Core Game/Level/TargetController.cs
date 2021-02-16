@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TargetController : MonoBehaviour
 {
@@ -14,11 +15,15 @@ public class TargetController : MonoBehaviour
     int currentCount = 0;
     Level level;
     MeshRenderer meshRenderer;
+    TMP_Text sheepCountText;
 
     private void Start()
     {
         level = gameObject.GetComponentInParent<Level>();
         meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        sheepCountText = GetComponentInChildren<TMP_Text>();
+
+        sheepCountText.text = targetCount.ToString();
     }
 
     private void CheckCountAndHandleActions()
@@ -34,6 +39,14 @@ public class TargetController : MonoBehaviour
             meshRenderer.material = targetActive;
             //Debug.Log($"currentCount: {currentCount} -> count is less");
         }
+
+        UpdateSheepCountText();
+    }
+
+    private void UpdateSheepCountText()
+    {
+        int displayCount = Mathf.Clamp(targetCount - currentCount, 0, targetCount);
+        sheepCountText.text = displayCount != 0 ? displayCount.ToString() : "";
     }
 
     private void OnTriggerEnter(Collider other)

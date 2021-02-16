@@ -120,10 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b25a9350d0af74392bebf3598b47c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomMoveDistance: 5
-  randomMoveTimerMin: 3
-  randomMoveTimerMax: 6
-  sheepPlayerDistance: 5
+  randomMoveDistance: 4
+  randomMoveTimerMin: 4
+  randomMoveTimerMax: 7
+  sheepPlayerDistance: 6
   sheepMaterial: {fileID: 2100000, guid: 73368701fef9bd1479a22edd8dfb45e9, type: 2}
   onTargetMaterial: {fileID: 2100000, guid: d42c5aa2e877fa844a75883e33d2b6f7, type: 2}
 --- !u!54 &-784074588672502310
