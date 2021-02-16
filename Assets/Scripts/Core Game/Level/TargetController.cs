@@ -16,12 +16,14 @@ public class TargetController : MonoBehaviour
     Level level;
     MeshRenderer meshRenderer;
     TMP_Text sheepCountText;
+    AudioManager audioManager;
 
     private void Start()
     {
         level = gameObject.GetComponentInParent<Level>();
         meshRenderer = gameObject.GetComponent<MeshRenderer>();
         sheepCountText = GetComponentInChildren<TMP_Text>();
+        audioManager = AudioManager.GetInstance();
 
         sheepCountText.text = targetCount.ToString();
     }
@@ -31,13 +33,11 @@ public class TargetController : MonoBehaviour
         if (currentCount >= targetCount)
         {
             meshRenderer.material = targetDone;
-            //Debug.Log($"currentCount: {currentCount} -> count is bigger");
             level.TargetIsMet();
         }
         else if (currentCount < targetCount)
         {
             meshRenderer.material = targetActive;
-            //Debug.Log($"currentCount: {currentCount} -> count is less");
         }
 
         UpdateSheepCountText();
@@ -54,6 +54,10 @@ public class TargetController : MonoBehaviour
         if (other.gameObject.tag == "Sheep")
         {
             currentCount++;
+            if (currentCount <= targetCount)
+            {
+                audioManager.PlayDingSound();
+            }
             CheckCountAndHandleActions();
         }
     }

@@ -57,7 +57,6 @@ public class Sheep : MonoBehaviour
         {
             meshRenderer.material = onTargetMaterial;
             StopCoroutine(randomMove);
-            audioManager.PlayDingSound();
         }
     }
 
