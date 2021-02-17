@@ -12,22 +12,26 @@ public class PlayerMovement : MonoBehaviour
     NavMeshAgent agent;
     Game game;
     Animator anim;
+    AudioManager audioManager;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         game = Game.GetInstance();
+        audioManager = AudioManager.GetInstance();
     }
 
     private void Update()
     {
         if (!game.IsPaused)
         {
+            
             float horInput = Input.GetAxis("Horizontal");
             float verInput = Input.GetAxis("Vertical");
 
-            if(Mathf.Abs(horInput) > 0 || Mathf.Abs(verInput) > 0)
+            // Check for Keyboard movement
+            if (Mathf.Abs(horInput) > 0 || Mathf.Abs(verInput) > 0)
             {
                 Vector3 moveDestination = 
                     transform.position 
@@ -36,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
                 agent.SetDestination(moveDestination);
             }
+            // Check for Mouse click movement
             else
             {
                 if (Input.GetMouseButtonDown(0))
@@ -51,16 +56,17 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-
-        // TODO maybe move it to separate script?
-        // handling walk Animation 
-        if (Math.Abs(agent.velocity.x + agent.velocity.y + agent.velocity.z) > .05f)
+        // handling walk Animation and Sound
+        if (agent.velocity.magnitude > 0.1f)
         {
             anim.SetBool("isWalking", true);
+            audioManager.PlayWalkingSound(true);
         }
         else
         {
             anim.SetBool("isWalking", false);
+            audioManager.PlayWalkingSound(false);
+
         }
 
     }

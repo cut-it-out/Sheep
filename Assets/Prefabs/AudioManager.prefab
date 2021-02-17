@@ -175,9 +175,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sheepAudioSource: {fileID: 3032932820324752535}
-  musicAudioSource: {fileID: 7818970069600418306}
   ambientAudioSource: {fileID: 326593973}
   effectAudioSource: {fileID: 264195607345454746}
+  walkingAudioSource: {fileID: 7818970069600418306}
   sheepSounds:
   - {fileID: 8300000, guid: 5a4a15b3221a84a47a7d97e64f0f54c5, type: 3}
   - {fileID: 8300000, guid: 3b19605f3defe174a801932200401123, type: 3}
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 7087394093494465576}
   - component: {fileID: 7818970069600418306}
   m_Layer: 0
-  m_Name: MusicAudioSource
+  m_Name: WalkingAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,9 +231,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ca4a0ef11e1630945ae778d5561da5cb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9e0aa44c4e6913f41a9b62ea2f099aab, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
