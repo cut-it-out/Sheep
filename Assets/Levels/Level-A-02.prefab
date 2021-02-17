@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4f4c8dd0b727b44b85b8032eb44405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  twoStarTime: 60
+  twoStarTime: 30
 --- !u!1001 &351478887446911213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3484366681385070621, guid: 9fb2c892fc4dde3478199ec99ef7f1fd, type: 3}
       propertyPath: m_ReceiveShadows
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435803119363005434, guid: 9fb2c892fc4dde3478199ec99ef7f1fd, type: 3}
       propertyPath: m_Name
