@@ -10,7 +10,8 @@ public enum ButtonType
     RESTART_LEVEL,
     MAIN_MENU,
     LEVEL,
-    QUIT
+    QUIT,
+    SOUND
 }
 
 [RequireComponent(typeof(Button))]
@@ -62,6 +63,9 @@ public class ButtonController : MonoBehaviour
                 break;
             case ButtonType.QUIT:
                 game.QuitGame();
+                break;
+            case ButtonType.SOUND:
+                GetComponent<SoundToggleButton>().ToggleSound();
                 break;
             default:
                 break;

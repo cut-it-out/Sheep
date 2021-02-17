@@ -5,7 +5,6 @@ using UnityEngine;
 public class AudioManager : Singleton<AudioManager>
 {
     [SerializeField] AudioSource sheepAudioSource;
-    [SerializeField] AudioSource musicAudioSource;
     [SerializeField] AudioSource ambientAudioSource;
     [SerializeField] AudioSource effectAudioSource;
 
@@ -16,16 +15,12 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioClip dingSound;
     [SerializeField] float dingVolume = 0.5f;
 
-
-
-    public bool MusicEnabled { get; private set; }
     public bool AmbientEnabled { get; private set; }
     public bool SoundEnabled { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
-        MusicEnabled = true;
         AmbientEnabled = true;
         SoundEnabled = true;
     }
@@ -50,22 +45,23 @@ public class AudioManager : Singleton<AudioManager>
     }
 
 
-    public void SetMusic(bool isEnabled)
+    public void SetAmbient(bool isEnabled)
     {
-        MusicEnabled = isEnabled;
-        if (MusicEnabled)
+        AmbientEnabled = isEnabled;
+        if (AmbientEnabled)
         {
-            musicAudioSource.Play();
+            ambientAudioSource.Play();
         }
         else
         {
-            musicAudioSource.Stop();
+            ambientAudioSource.Stop();
         }
     }
 
     public void SetSound(bool isEnabled)
     {
         SoundEnabled = isEnabled;
+        SetAmbient(isEnabled);
     }
 
 }
