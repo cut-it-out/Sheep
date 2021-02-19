@@ -57,11 +57,12 @@ public class Game : Singleton<Game>
         }
 
         // check for highest level achieved
-        HandleWhichLevelComesNext();
+        UpdateHighestLevelFinished();
+        UpdateNextLevelToLoad();
 
     }
 
-    private void HandleWhichLevelComesNext()
+    private void UpdateHighestLevelFinished()
     {
         int i = 0;
         while (i < Data.levelStars.Length)
@@ -75,14 +76,19 @@ public class Game : Singleton<Game>
                 break;
             }
         }
-
-        HighestLevelFinished = i < Data.levelStars.Length ? i - 1 : Data.levelStars.Length - 2;
-        UpdateNextLevelToLoad();
+        HighestLevelFinished = i < Data.levelStars.Length ? i - 1 : Data.levelStars.Length - 2;        
     }
 
     private void UpdateNextLevelToLoad()
     {
-        NextLevelToLoad = HighestLevelFinished + 1;
+        if (LevelResults.levelName != null && !LevelResults.lastLevel)
+        {
+            NextLevelToLoad = LevelResults.levelIndex + 1;
+        }
+        else
+        {
+            NextLevelToLoad = HighestLevelFinished + 1;
+        }
         Debug.Log("NextLevelToLoad: " + NextLevelToLoad);
         levelManager.SetCurrentLevelIndex(NextLevelToLoad);
     }
@@ -125,7 +131,8 @@ public class Game : Singleton<Game>
         SetLevelResults();
 
         //Debug.Log("HighestLevelFinished: " + HighestLevelFinished);
-        HandleWhichLevelComesNext();
+        UpdateHighestLevelFinished();
+        UpdateNextLevelToLoad();
 
         canvasManager.SwitchCanvas(CanvasType.LevelFinished);
     }

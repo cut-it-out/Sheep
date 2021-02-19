@@ -68,7 +68,7 @@ public class LevelSelectionUIManager : MonoBehaviour
             if (level <= totalLevel)
             {
                 levelButtons[i].gameObject.SetActive(true);
-                levelButtons[i].Setup(level, i <= game.NextLevelToLoad, game.Data.levelStars[i]);
+                levelButtons[i].Setup(level, i <= game.HighestLevelFinished + 1, game.Data.levelStars[i]);
             }
             else
             {
