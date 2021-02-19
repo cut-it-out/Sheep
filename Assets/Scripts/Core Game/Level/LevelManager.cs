@@ -29,8 +29,9 @@ public class LevelManager : Singleton<LevelManager>
                 return;
         }
 
-        // load desired level
         UnloadLevel();
+
+        // load desired level
         CurrentLevelObject = InstantiateLevel(levels[CurrentLevelIndex]);
 
         //Debug.Log("CurrentLevelIndex: " + CurrentLevelIndex);
@@ -56,6 +57,7 @@ public class LevelManager : Singleton<LevelManager>
         if (CurrentLevelObject != null)
         {
             Debug.Log("Unloading level");
+            CurrentLevelObject.SetActive(false); // disable as it will not be destroyed on the spot
             Destroy(CurrentLevelObject);
         }
     }
