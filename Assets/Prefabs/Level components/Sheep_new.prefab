@@ -96,10 +96,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2.0379567
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 5
+  m_Acceleration: 11
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 190
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -120,12 +120,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b25a9350d0af74392bebf3598b47c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 5
+  runningSpeed: 7.5
+  baseAcceleration: 11
+  runningAcceleration: 18
+  runningTime: 0.4
   randomMoveDistance: 4
-  randomMoveTimerMin: 4
-  randomMoveTimerMax: 7
-  sheepPlayerDistance: 6
-  sheepMaterial: {fileID: 2100000, guid: 73368701fef9bd1479a22edd8dfb45e9, type: 2}
-  onTargetMaterial: {fileID: 2100000, guid: d42c5aa2e877fa844a75883e33d2b6f7, type: 2}
+  randomMoveTimerMin: 3
+  randomMoveTimerMax: 8
+  sheepPlayerDistance: 5.5
 --- !u!54 &-784074588672502310
 Rigidbody:
   m_ObjectHideFlags: 0
