@@ -121,14 +121,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 5
-  runningSpeed: 7.5
+  runningSpeed: 6.5
   baseAcceleration: 11
-  runningAcceleration: 18
+  runningAcceleration: 20
   runningTime: 0.4
   randomMoveDistance: 4
   randomMoveTimerMin: 3
   randomMoveTimerMax: 8
-  sheepPlayerDistance: 5.5
+  sheepPlayerMinimumDistance: 5.5
+  sheepPlayerDistanceMultiplier: 1.5
 --- !u!54 &-784074588672502310
 Rigidbody:
   m_ObjectHideFlags: 0

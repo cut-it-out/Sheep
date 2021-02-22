@@ -18,7 +18,8 @@ public class Sheep : MonoBehaviour
     [SerializeField] float randomMoveTimerMax = 6f;
     
     [Header("Player Distance")]
-    [SerializeField] float sheepPlayerDistance = 3f;
+    [SerializeField] float sheepPlayerMinimumDistance = 5.5f;
+    [SerializeField] float sheepPlayerDistanceMultiplier = 1.5f;
 
     const float STOP_DELAY = 0.8f;
 
@@ -44,14 +45,14 @@ public class Sheep : MonoBehaviour
         //if (!isInTargetArea)
         //{
             float squaredDist = (transform.position - player.transform.position).sqrMagnitude;
-            float sheepPlayerDistanceSqrt = sheepPlayerDistance * sheepPlayerDistance;
+            float sheepPlayerDistanceSqrt = sheepPlayerMinimumDistance * sheepPlayerMinimumDistance;
 
             if (squaredDist < sheepPlayerDistanceSqrt)
             {
                 if (!isSheepMovingAway)
                 {
                     Vector3 dirToPlayer = transform.position - player.transform.position;
-                    sheepMoveAwayTargetPos = transform.position + dirToPlayer;
+                    sheepMoveAwayTargetPos = transform.position + dirToPlayer * sheepPlayerDistanceMultiplier;
 
                     //agent.SetDestination(sheepMoveAwayTargetPos);
                     sheepMoveAway = StartCoroutine(MoveSheepAway());
