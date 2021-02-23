@@ -46,6 +46,11 @@ public class PlayerAnimation : MonoBehaviour
             audioManager.PlayWalkingSound(false);
 
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.Play("Jump");
+        }
     }
 
     private IEnumerator FunIdle()
