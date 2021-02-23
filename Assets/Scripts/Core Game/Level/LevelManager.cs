@@ -91,4 +91,9 @@ public class LevelManager : Singleton<LevelManager>
     {
         return levels.Count;
     }
+
+    public int GetCurrentStarCount(float levelTime)
+    {
+        return CurrentLevelObject.GetComponent<Level>().HowManyStars(levelTime);
+    }
 }
