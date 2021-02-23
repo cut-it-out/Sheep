@@ -1711,6 +1711,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3775318995892929157}
     m_Modifications:
+    - target: {fileID: 5800672521061805253, guid: 06e33d67ba2f4d349b46a9ab20598e2b, type: 3}
+      propertyPath: m_fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800672521061805253, guid: 06e33d67ba2f4d349b46a9ab20598e2b, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 7008544821812896820, guid: 06e33d67ba2f4d349b46a9ab20598e2b, type: 3}
       propertyPath: m_Name
       value: Move with
@@ -1761,7 +1769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9123138159578477930, guid: 06e33d67ba2f4d349b46a9ab20598e2b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.28
+      value: -23.89
       objectReference: {fileID: 0}
     - target: {fileID: 9123138159578477930, guid: 06e33d67ba2f4d349b46a9ab20598e2b, type: 3}
       propertyPath: m_LocalRotation.w
