@@ -125,11 +125,11 @@ MonoBehaviour:
   baseAcceleration: 11
   runningAcceleration: 20
   runningTime: 0.4
-  randomMoveDistance: 4
-  randomMoveTimerMin: 3
-  randomMoveTimerMax: 8
+  randomMoveDistance: 3
+  randomMoveTimerMin: 2
+  randomMoveTimerMax: 12
   sheepPlayerMinimumDistance: 5.5
-  sheepPlayerDistanceMultiplier: 1.5
+  sheepPlayerDistanceMultiplier: 1.4
 --- !u!54 &-784074588672502310
 Rigidbody:
   m_ObjectHideFlags: 0

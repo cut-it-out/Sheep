@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e3d9145f25267479eba95853495e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  funnyIdleTriggerDelay: 3
+  funnyIdleTriggerDelay: 4
 --- !u!1 &4132604990437301900
 GameObject:
   m_ObjectHideFlags: 0
