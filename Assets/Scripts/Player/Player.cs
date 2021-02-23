@@ -26,7 +26,7 @@ public class Player : Singleton<Player>
         {
             Debug.Log("playermovement is ok");
         } else
-            Debug.Log("playermovement missing!!!!!!!!!!!!!!!!");
+            Debug.LogWarning("playermovement missing!!!!!!!!!!!!!!!!");
         playerMovement.MovePlayer(tf.position, true);
     }
 }

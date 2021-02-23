@@ -11,15 +11,11 @@ public class PlayerMovement : MonoBehaviour
 
     NavMeshAgent agent;
     Game game;
-    Animator anim;
-    AudioManager audioManager;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        anim = GetComponent<Animator>();
         game = Game.GetInstance();
-        audioManager = AudioManager.GetInstance();
     }
 
     private void Update()
@@ -55,20 +51,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-
-        // handling walk Animation and Sound
-        if (agent.velocity.magnitude > 0.1f)
-        {
-            anim.SetBool("isWalking", true);
-            audioManager.PlayWalkingSound(true);
-        }
-        else
-        {
-            anim.SetBool("isWalking", false);
-            audioManager.PlayWalkingSound(false);
-
-        }
-
     }
 
     public void MovePlayer(Vector3 moveToPos, bool warp = false)
