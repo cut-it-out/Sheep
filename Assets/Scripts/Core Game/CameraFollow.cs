@@ -4,10 +4,10 @@ public class CameraFollow : MonoBehaviour
 {
     [SerializeField] Transform target;
     [SerializeField] Vector3 targetOffset;
-    [SerializeField] float smoothSpeed = 3f;
-    [SerializeField] float minZoom = 13f;
+    [SerializeField] float smoothSpeed = 2f;
+    [SerializeField] float minZoom = 10f;
     [SerializeField] float maxZoom = 22f;
-    [SerializeField] float zoomScale = .5f;
+    [SerializeField] float zoomScale = 2f;
 
     public bool zoomDirectionInverted = false;
 
@@ -22,7 +22,9 @@ public class CameraFollow : MonoBehaviour
         {
             float mouseScrollDelta = zoomDirectionInverted ? -1 * Input.mouseScrollDelta.y : Input.mouseScrollDelta.y;
             float newYOffset = Mathf.Clamp(targetOffset.y - mouseScrollDelta * zoomScale, minZoom, maxZoom);
+            float newZOffset = -1 * Mathf.Clamp((-1 * targetOffset.z) - mouseScrollDelta * zoomScale, minZoom, maxZoom);
             targetOffset.y = newYOffset;
+            targetOffset.z = newZOffset;
         }
     }
 

@@ -97,9 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  targetOffset: {x: 0, y: 16, z: -10}
-  smoothSpeed: 1.5
+  targetOffset: {x: 0, y: 16, z: -16}
+  smoothSpeed: 2.5
   minZoom: 10
-  maxZoom: 30
+  maxZoom: 22
   zoomScale: 2
   zoomDirectionInverted: 0
