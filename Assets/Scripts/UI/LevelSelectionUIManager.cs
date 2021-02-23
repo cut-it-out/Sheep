@@ -40,7 +40,7 @@ public class LevelSelectionUIManager : MonoBehaviour
 
     public void StartLevel(int level)
     {
-        Debug.Log("StartLevel: " + (level-1));
+        //Debug.Log("StartLevel: " + (level-1));
         game.LoadNextLevel(level - 1);
     }
 

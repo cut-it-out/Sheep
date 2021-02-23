@@ -56,7 +56,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (CurrentLevelObject != null)
         {
-            Debug.Log("Unloading level");
+            //Debug.Log("Unloading level");
             CurrentLevelObject.SetActive(false); // disable as it will not be destroyed on the spot
             Destroy(CurrentLevelObject);
         }

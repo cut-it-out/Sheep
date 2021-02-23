@@ -50,7 +50,7 @@ public class LevelButtonController : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("level click: " + level);
+        //Debug.Log("level click: " + level);
         levelSelectionManager.StartLevel(level);
     }
 }

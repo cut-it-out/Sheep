@@ -89,7 +89,7 @@ public class Game : Singleton<Game>
         {
             NextLevelToLoad = HighestLevelFinished + 1;
         }
-        Debug.Log("NextLevelToLoad: " + NextLevelToLoad);
+        //Debug.Log("NextLevelToLoad: " + NextLevelToLoad);
         levelManager.SetCurrentLevelIndex(NextLevelToLoad);
     }
 
@@ -99,7 +99,7 @@ public class Game : Singleton<Game>
     {
         SetLevelResults(true); // reset saved results
         ResumeGame(); // to make sure we don't stuck in pause
-        Debug.Log($"levelManager.LoadLevel({level})");
+        //Debug.Log($"levelManager.LoadLevel({level})");
         levelManager.LoadLevel(level);
         player.WarpToStartPosition(levelManager.PlayerStartTransform);
         IsPaused = false;
